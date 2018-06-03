@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# Usage: bin/convert [-r] [-k] kadai.md | pbcopy
+
 require 'commonmarker'
 
 class MyHtmlRenderer < CommonMarker::HtmlRenderer
