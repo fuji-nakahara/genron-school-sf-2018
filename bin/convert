@@ -1,0 +1,78 @@
+#!/usr/bin/env ruby
+
+require 'commonmarker'
+
+class MyHtmlRenderer < CommonMarker::HtmlRenderer
+  attr_reader :kakuyomu_kenten, :kakuyomu_ruby
+
+  def initialize(options: :DEFAULT, extensions: [], kakuyomu_kenten: false, kakuyomu_ruby: false)
+    super(options: options, extensions: extensions)
+    @kakuyomu_kenten = kakuyomu_kenten
+    @kakuyomu_ruby = kakuyomu_ruby
+  end
+
+  def paragraph(node)
+    if @in_tight && node.parent.type != :blockquote
+      out(:children)
+    else
+      block do
+        style = 'margin: 0;'
+        child_node = node.first_child
+        if child_node.string_content.start_with?('　')
+          child_node.string_content = child_node.string_content[1..-1]
+        else
+          style += ' text-indent: 0;'
+        end
+        container(%(<p style="#{style}">), '</p>') do
+          out(:children)
+        end
+      end
+    end
+  end
+
+  def emph(node)
+    return out('《《', :children, '》》') if kakuyomu_kenten
+
+    text_node = node.first_child
+    kenten_text = text_node.string_content.split('').map { |c| %(<span class="boten">#{c}</span>) }.join
+    out('<em class="botenparent kuromaru" style="font-style: normal">', kenten_text, '</em>')
+  end
+
+  def inline_html(node)
+    return super(node) unless kakuyomu_ruby
+
+    case node.string_content
+    when '<ruby>'
+      out('|') unless node.next.string_content.match?(/\A[一-龠々]+\z/)
+    when '</ruby>'
+      # nothing to do
+    when '<rt>'
+      out('《')
+    when '</rt>'
+      out('》')
+    else
+      super(node)
+    end
+  end
+end
+
+require 'optparse'
+require 'fuji_markdown'
+
+options = {
+  kakuyomu_kenten: false,
+  kakuyomu_ruby: false,
+}
+
+OptionParser.new do |opts|
+  opts.on('-k', '--kakuyomu_kenten', 'Use Kakuyomu kenten') do
+    options[:kakuyomu_kenten] = true
+  end
+  opts.on('-r', '--kakuyomu_ruby', 'Use Kakuyomu ruby') do
+    options[:kakuyomu_ruby] = true
+  end
+end.parse!
+
+renderer = MyHtmlRenderer.new(options: :HARDBREAKS, **options)
+doc = FujiMarkdown.parse(ARGF.read)
+puts renderer.render(doc)
