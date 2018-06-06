@@ -1,30 +1,40 @@
 #!/usr/bin/env ruby
 
-# Usage: bin/convert [-r] [-k] kadai.md | pbcopy
+# Usage: bin/convert [-k] [-r] kadai.md | pbcopy
 
 require 'commonmarker'
 
 class MyHtmlRenderer < CommonMarker::HtmlRenderer
-  attr_reader :kakuyomu_kenten, :kakuyomu_ruby
+  attr_reader :kakuyomu_kenten
 
-  def initialize(options: :DEFAULT, extensions: [], kakuyomu_kenten: false, kakuyomu_ruby: false)
+  def initialize(options: :HARDBREAKS, extensions: [], kakuyomu_kenten: false)
     super(options: options, extensions: extensions)
     @kakuyomu_kenten = kakuyomu_kenten
-    @kakuyomu_ruby = kakuyomu_ruby
   end
 
   def paragraph(node)
     if @in_tight && node.parent.type != :blockquote
       out(:children)
     else
-      block do
-        style = 'margin: 0;'
-        child_node = node.first_child
-        if child_node.string_content.start_with?('　')
-          child_node.string_content = child_node.string_content[1..-1]
+      style = 'margin: 0;'
+
+      first_text_node = nil
+      node.walk do |child_node|
+        if child_node.type == :text
+          first_text_node = child_node
+          break
+        end
+      end
+
+      unless first_text_node.nil?
+        if first_text_node.string_content.start_with?('　')
+          first_text_node.string_content = first_text_node.string_content[1..-1]
         else
           style += ' text-indent: 0;'
         end
+      end
+
+      block do
         container(%(<p style="#{style}">), '</p>') do
           out(:children)
         end
@@ -40,20 +50,9 @@ class MyHtmlRenderer < CommonMarker::HtmlRenderer
     out('<em class="botenparent kuromaru" style="font-style: normal">', kenten_text, '</em>')
   end
 
-  def inline_html(node)
-    return super(node) unless kakuyomu_ruby
-
-    case node.string_content
-    when '<ruby>'
-      out('|') unless node.next.string_content.match?(/\A[一-龠々]+\z/)
-    when '</ruby>'
-      # nothing to do
-    when '<rt>'
-      out('《')
-    when '</rt>'
-      out('》')
-    else
-      super(node)
+  def hrule(node)
+    block do
+      out('<hr style="border: 0; height: 0; margin: .5em 0;" />')
     end
   end
 end
@@ -62,19 +61,19 @@ require 'optparse'
 require 'fuji_markdown'
 
 options = {
-  kakuyomu_kenten: false,
-  kakuyomu_ruby: false,
+  preprocessors: [FujiMarkdown::Preprocessors::Ruby.new],
+  renderer: MyHtmlRenderer.new,
 }
 
 OptionParser.new do |opts|
-  opts.on('-k', '--kakuyomu_kenten', 'Use Kakuyomu kenten') do
-    options[:kakuyomu_kenten] = true
+  opts.on('-k', '--kakuyomu-kenten', 'Use Kakuyomu kenten') do
+    options[:renderer] = MyHtmlRenderer.new(kakuyomu_kenten: true)
   end
-  opts.on('-r', '--kakuyomu_ruby', 'Use Kakuyomu ruby') do
-    options[:kakuyomu_ruby] = true
+  opts.on('-r', '--kakuyomu-ruby', 'Use Kakuyomu ruby') do
+    options[:preprocessors] << Proc.new { |text| text.gsub!(/《/, '|《') }
+    options[:postprocessors] = [FujiMarkdown::Postprocessors::Ruby.new(omit_start_symbol: true)]
   end
 end.parse!
 
-renderer = MyHtmlRenderer.new(options: :HARDBREAKS, **options)
-doc = FujiMarkdown.parse(ARGF.read)
-puts renderer.render(doc)
+processor = FujiMarkdown::Processor.new(options)
+puts processor.render(ARGF.read)
