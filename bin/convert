@@ -2,7 +2,10 @@
 
 # Usage: bin/convert [-k] [-r] kadai.md | pbcopy
 
+require 'optparse'
+
 require 'commonmarker'
+require 'fuji_markdown'
 
 class MyHtmlRenderer < CommonMarker::HtmlRenderer
   attr_reader :kakuyomu_kenten
@@ -52,13 +55,10 @@ class MyHtmlRenderer < CommonMarker::HtmlRenderer
 
   def hrule(node)
     block do
-      out('<hr style="border: 0; height: 0; margin: .5em 0;" />')
+      out('<hr style="border: 0; height: 0; margin: 1em 0;" />')
     end
   end
 end
-
-require 'optparse'
-require 'fuji_markdown'
 
 options = {
   preprocessors: [FujiMarkdown::Preprocessors::Ruby.new],
