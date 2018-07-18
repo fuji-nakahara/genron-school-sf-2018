@@ -1,0 +1,29 @@
+sudo: false
+
+language: ruby
+rvm:
+  - 2.5
+
+env:
+  global:
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+
+cache: bundler
+
+script:
+  - bundle exec jekyll build
+  - bundle exec htmlproofer ./_site --url-swap '\/genron-sf-2018:'
+
+branches:
+  only:
+    - master
+
+deploy:
+  provider: pages
+  github-token:
+    secure: L6KfSB6KS56dfvImgHMg8WUp+AGozraRVAzvYYuSoPfSwQVvG5P9gpRC8IU+QGvK748NRARFBdggJ1SckE1MSlHi/6uG20tES+ZJBFlBG8+Yh5cy+NGJRkS9tR46ZkULonr1zWzquTM9Z/wOcFCEpI/lczs90zR4hq9HI0poW1HcWGlzqzrBTqeTMhq1nNDeS44/WBqC9+GKddqhr9rM1q7wARG5GFqLOI23gDwpckJRqWRZZ5EPobgDPNY9Q4Qpu1IzYsQQzOQH8t9ljI79GbzlfsgrNIMopdYAcJo2VFkR6EMj6xdg6db2lDYLGTj7rhcvfLn6H7t++NafPJr3QmEd2alwYQXgQP1y5FNbezDG4JHuFX26oDM9tiEW8SA/+07dLA8iiU9Do67Te3tx2yRNpNFZSjkBV+OV/2/4LL5i11B4HA9It59P54/7m1jQkT3/j/daoANooxUEzWcXzKv8ztUonhQ3VmRRvjsa2KsPV+4qjxsFvsPnoWs5M+41AJAUlcTBW0HniXw64MtzZY6+suXDJYA3a+lH3cVJn0QkYfOCpLEAl6A2uU80sTy6/wGe+3j8NI5LN9xl6pjNoGnozbFPJ1jLgqEOJpA2y4XiaGqgJcs9iFJ3Hx57dAfbUaUom8P/2/976JVyvsf0FALwDI8kO4/TXg1f2Ezq+vY=
+  skip-cleanup: true
+  local-dir: _site
+  target_branch: gh-pages
+  on:
+    branch: master
