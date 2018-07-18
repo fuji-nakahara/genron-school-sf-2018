@@ -12,7 +12,7 @@ cache: bundler
 
 script:
   - bundle exec jekyll build
-  - bundle exec htmlproofer ./_site --url-swap '\/genron-sf-2018:'
+  - bundle exec htmlproofer ./_site --url-swap '\A\/genron-sf-2018:' --disable-external
 
 branches:
   only:
