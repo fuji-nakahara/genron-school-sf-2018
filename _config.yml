@@ -15,8 +15,8 @@ title: SF創作講座 2018 梗概集
 description: >-
   「ゲンロン 大森望 SF創作講座 2018」におけるフジ・ナカハラの提出梗概集
 author: フジ・ナカハラ
-url: "https://fuji-nakahara.github.io"
-baseurl: "/genron-sf-2018" # the subpath of your site, e.g. /blog
+url: https://fuji-nakahara.github.io
+baseurl: /genron-sf-2018 # the subpath of your site, e.g. /blog
 timezone: Asia/Tokyo
 lang: ja_JP
 
@@ -42,12 +42,13 @@ exclude:
 defaults:
   - scope:
       path: ""
-      type: "posts"
+      type: posts
     values:
-      layout: "novel"
+      layout: novel
 
 # Theme settings
-homepage: "https://fuji-nakahara.github.io/"
+homepage: https://fuji-nakahara.github.io/
+repository: fuji-nakahara/genron-sf-2018
 google_analytics: UA-118273401-1
 reverse_posts_order: false
 show_excerpts: true
