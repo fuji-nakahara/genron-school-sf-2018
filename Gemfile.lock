@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/fuji-nakahara/jekyll-theme-fuji.git
-  revision: ae49b50696897e804e67d424dab89ff18bc344cc
+  revision: 59a5ee7b350a9ea48a4b9276d09ef637277b87ca
   specs:
     jekyll-theme-fuji (0.1.0)
       jekyll (~> 3.8)
@@ -19,7 +19,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     colorator (1.1.0)
     colorize (0.8.1)
-    commonmarker (0.17.11)
+    commonmarker (0.17.13)
       ruby-enum (~> 0.5)
     concurrent-ruby (1.0.5)
     em-websocket (0.5.1)
@@ -57,7 +57,7 @@ GEM
       pathutil (~> 0.9)
       rouge (>= 1.7, < 4)
       safe_yaml (~> 1.0)
-    jekyll-feed (0.10.0)
+    jekyll-feed (0.11.0)
       jekyll (~> 3.3)
     jekyll-fuji_markdown (0.2.0)
       fuji_markdown (= 0.2.0)
@@ -81,11 +81,11 @@ GEM
     parallel (1.12.1)
     pathutil (0.16.1)
       forwardable-extended (~> 2.6)
-    public_suffix (3.0.2)
+    public_suffix (3.0.3)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    rouge (3.2.0)
+    rouge (3.2.1)
     ruby-enum (0.7.2)
       i18n
     ruby_dep (1.5.0)
