@@ -17,6 +17,7 @@ description: >-
 author: フジ・ナカハラ
 url: https://fuji-nakahara.github.io
 baseurl: /genron-sf-2018 # the subpath of your site, e.g. /blog
+version: v0.4.0
 timezone: Asia/Tokyo
 lang: ja_JP
 
@@ -50,6 +51,7 @@ defaults:
 homepage: https://fuji-nakahara.github.io/
 repository: fuji-nakahara/genron-sf-2018
 google_analytics: UA-118273401-1
+show_ebooks_from_github_releases: true
 reverse_posts_order: false
 show_excerpts: true
 show_date: true

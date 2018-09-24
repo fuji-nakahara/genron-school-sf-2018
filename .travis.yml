@@ -14,7 +14,7 @@ cache: bundler
 script:
   - bundle exec jekyll build
   - bundle exec htmlproofer ./_site --url-swap '\A\/genron-sf-2018:' --disable-external
-  - bundle exec jekyll build-ebook
+  - bundle exec jekyll build-ebook --kindle
 
 branches:
   only:
@@ -34,6 +34,8 @@ deploy:
     api_key:
       secure: axHeeDd9QAMnQOnZPeFwNtzf2vEqZLV9QOL86vBH8ynDu1P0I4bumdcGtXQ8cmfKyf4x56UkGpSxNAqf+IFQztbWWlfwH3t/z5OAwAERAKkra8kDabCE+4iz2kOQ61AEOmT6J8Z0R1Y7uUEExiX/0nV6LAlTpSJc+D5hUqOEd5vSpSSfbz0kwbSIp9KsQK1ejwZMUY5g/hLoQFX3Vqps5LEd83wLSmVZaK3n6czawWAeVhqa5blOSxqyGB52/V0RWDvb2V2SuSS6ZJgqd/isgL4PQhgd7oCB4GVnuVfTsvdQ+wE2/zkqVvjh8tIFx53GGFrgI0+WBF52sr/0UxPRbXWimT2eMkDliiV1FnHXQCkHBHglsvAWhJ5XnK+jDyifFqI8Iyf+KjAEHGVusdZVjDXvxU91Elk1BUET3YHWNY9PRGiMJWjEFZuwgJdnntXUWxxpZ0ensHPb+25gnTSLQd51SoxTcUttY+ERsPYno5s/ZpPenoRSy0X1Y2DXQCvCyH7JjUbY7TbRmebvpEykc9shoWKgkhGgFylYuQvC0GqKQIu6kbMxCfkjhHGpiKRU2q+FQN0dbMJPqC28r8trNfqPh2RYOsXA97eLJB26QGmX4U9TDHeuuqYSEciLB6MCpZ9uzKQu4MhbpHj74By7cPwIYgV32W4FB9tCAkPsBdg=
     skip_cleanup: true
-    file: _ebook/genron-sf-2018.epub
+    file:
+      - _ebook/genron-sf-2018.epub
+      - _ebook/genron-sf-2018.mobi
     on:
       tags: true
