@@ -1,6 +1,7 @@
 ---
 title: 第4回 interesting_story.nako3
-date: 2018-09-13 00:00:00 +0900
+kakuyomu:
+  url: https://kakuyomu.jp/works/1177354054885765919/episodes/1177354054886978511
 ---
 
 ```
