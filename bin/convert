@@ -18,6 +18,12 @@ class MyHtmlRenderer < CommonMarker::HtmlRenderer
   def paragraph(node)
     if @in_tight && node.parent.type != :blockquote
       out(:children)
+    elsif node.parent.type == :blockquote
+      block do
+        container('<p style="margin: 1em 0;">', '</p>') do
+          out(:children)
+        end
+      end
     else
       style = 'margin: 0;'
 
@@ -51,6 +57,14 @@ class MyHtmlRenderer < CommonMarker::HtmlRenderer
     text_node = node.first_child
     kenten_text = text_node.string_content.split('').map { |c| %(<span class="boten">#{c}</span>) }.join
     out('<em class="botenparent kuromaru" style="font-style: normal">', kenten_text, '</em>')
+  end
+
+  def blockquote(node)
+    block do
+      container(%(<blockquote style="color: gray">\n), '</blockquote>') do
+        out(:children)
+      end
+    end
   end
 
   def hrule(node)
