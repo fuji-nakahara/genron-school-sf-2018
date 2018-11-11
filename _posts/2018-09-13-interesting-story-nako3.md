@@ -2,6 +2,8 @@
 title: 第4回 interesting_story.nako3
 kakuyomu:
   url: https://kakuyomu.jp/works/1177354054885765919/episodes/1177354054886978511
+narou:
+  url: https://syosetu.com/usernoveldatamanage/top/ncode/1327399/noveldataid/11173968/
 ---
 
 ```

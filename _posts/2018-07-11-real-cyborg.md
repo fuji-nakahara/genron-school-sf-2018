@@ -2,6 +2,8 @@
 title: 第2回 リアル・サイボーグ
 kakuyomu:
   url: https://kakuyomu.jp/works/1177354054885765919/episodes/1177354054886374358
+narou:
+  url: https://syosetu.com/usernoveldatamanage/top/ncode/1327399/noveldataid/11173956/
 ---
 
 　ヒロトはもちろん、1年4組の生徒は皆、ケイと出会った入学式の朝のことを忘れないだろう。
