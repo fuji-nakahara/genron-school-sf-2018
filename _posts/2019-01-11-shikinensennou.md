@@ -1,5 +1,9 @@
 ---
 title: 第8回 式年遷皇
+kakuyomu:
+  url: https://kakuyomu.jp/works/1177354054885765919/episodes/1177354054888143256
+narou:
+  url: https://syosetu.com/usernoveldatamanage/top/ncode/1327399/noveldataid/11517818/
 ---
 
 　キヨトは、つぎの時代の〈天皇〉をつくる式年遷皇プロジェクトの一員だ。
