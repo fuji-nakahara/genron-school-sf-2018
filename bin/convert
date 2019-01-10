@@ -10,7 +10,7 @@ require 'fuji_markdown'
 class MyHtmlRenderer < CommonMarker::HtmlRenderer
   attr_reader :kakuyomu_kenten
 
-  def initialize(options: :HARDBREAKS, extensions: [], kakuyomu_kenten: false)
+  def initialize(options: [:HARDBREAKS, :UNSAFE], extensions: [], kakuyomu_kenten: false)
     super(options: options, extensions: extensions)
     @kakuyomu_kenten = kakuyomu_kenten
   end
