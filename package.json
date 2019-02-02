@@ -1,9 +1,10 @@
 {
+  "private": true,
   "scripts": {
-    "textlint": "textlint"
+    "lint": "textlint _drafts _posts"
   },
   "devDependencies": {
-    "textlint": "^11.0.1",
-    "textlint-rule-preset-jtf-style": "^2.3.1"
+    "textlint": "^11.2.1",
+    "textlint-rule-preset-fuji": "github:fuji-nakahara/textlint-rule-preset-fuji"
   }
 }
