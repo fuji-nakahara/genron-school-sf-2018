@@ -1,15 +1,7 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-gem 'jekyll', '~> 3.8'
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
-gem 'jekyll-theme-fuji', git: 'https://github.com/fuji-nakahara/jekyll-theme-fuji.git'
-
-group :jekyll_plugins do
-  gem 'jekyll-fuji_markdown'
-  gem 'jekyll-build-ebook'
-  gem 'jekyll-deploy-shosetsu'
-end
-
-group :test do
-  gem 'html-proofer'
-end
+gem 'makimono'

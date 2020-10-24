@@ -1,10 +1,4 @@
----
-title: 第1回 から揚げと Let It Be
-kakuyomu:
-  url: https://kakuyomu.jp/works/1177354054885765919/episodes/1177354054886054690
-narou:
-  url: https://syosetu.com/usernoveldatamanage/top/ncode/1327399/noveldataid/11161408/
----
+# 第１回 から揚げと Let It Be
 
 　ユウジは、唐揚げを作るレイナの後ろ姿を見ていた。それは、ユウジにとって百二十年ぶりの唐揚げだった。昔と同じ、油のはねる音や香ばしい匂いに、ユウジは当時を思い出す。
 

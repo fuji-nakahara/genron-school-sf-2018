@@ -1,5 +1,7 @@
 {
   "rules": {
-    "preset-fuji": true
+    "preset-fuji": {
+      "ja-no-successive-word": false
+    }
   }
 }
